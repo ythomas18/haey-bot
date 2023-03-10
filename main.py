@@ -1,41 +1,49 @@
 import discord
+import requests
 from discord.ext import commands
-import icalendar
+import aiohttp
 
-intents = discord.Intents.default()
-intents.members = True  # permet de récupérer les membres du serveur
+bot = commands.Bot(intents=discord.Intents.all(), command_prefix='/')
 
-bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
 async def on_ready():
-    print('Bot is ready.')
+    print(f'Logged in as {bot.user.name}')
 
-@bot.command()
-async def agenda(ctx):
-    # Ouverture du fichier iCal statique
-    with open('ADECal.ics', 'rb') as f:
-        cal = icalendar.Calendar.from_ical(f.read())
-
-    # Parcours des événements dans le calendrier
-    for event in cal.walk('vevent'):
-        # Récupération des informations de l'événement
-        summary = event.get('summary')
-        start = event.get('dtstart').dt
-        end = event.get('dtend').dt
-        location = event.get('location')
-
-        # Affichage des informations de l'événement
-        await ctx.send(f"{summary} ({location}) du {start.strftime('%d/%m/%Y %H:%M')} au {end.strftime('%d/%m/%Y %H:%M')}")
 
 @bot.event
 async def on_message(message):
-    if message.content.lower().endswith('quoi'):
-        await message.channel.send(message.author.mention + "feur")
+    if 'quoi' in message.content:
+        print("quoi détecté !")
+        await message.channel.send(f"{message.author.mention} ok QUOICOUBEH")
 
-@bot.event
-async def xavier(message):
-    if message.author.discriminator == 'Baka_a_toi':
-        await message.channel.send("Xavier qu'a écouter !")
+    elif 'ratio' in message.content:
+        print("ratio détecté !")
+        await message.channel.send(f"{message.author.mention} gros flop rions :joy_cat:")
+    await bot.process_commands(message)
 
-bot.run('MTA3NjIyMDQzMTQzNjA5MTQ3Mg.Gx2aus.T4PSbV2amTvO5sx93h89JQughSRxU3reMObRV8')
+API_KEY='GAn1Jt3SDDJik1pXpxnfnZ2KvlCRGVVm'
+@bot.command()
+async def meteo(ctx, ville):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={API_KEY}&q={ville}") as response:
+            data = await response.json()
+            location_key = data[0]["Key"]
+            city_name = data[0]["LocalizedName"]
+        async with session.get(f"http://dataservice.accuweather.com/currentconditions/v1/{location_key}?apikey={API_KEY}&details=true") as response:
+            data = await response.json()
+            temperature = data[0]["Temperature"]["Metric"]["Value"]
+            weather_text = data[0]["WeatherText"]
+            wind_speed = data[0]["Wind"]["Speed"]["Metric"]["Value"]
+            wind_direction = data[0]["Wind"]["Direction"]["Localized"]
+            humidity = data[0]["RelativeHumidity"]
+    await ctx.send(f"```Météo actuelle pour {city_name}:\n🌡️Température: {temperature}°C\n🌤️Conditions: {weather_text}\n🌬️Vitesse du vent: {wind_speed} km/h\n🧭Direction du vent: {wind_direction}\n💧Humidité: {humidity}%```")
+
+
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(ctx.author.mention + " hello!")
+
+
+bot.run('MTA4MzM3NDExNDEyMDY3MTI3NA.GrRDr3.0kV8TUM3GEYL6PH8lB7vnn5nOLuSoH2hAL6TLw')
