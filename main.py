@@ -14,7 +14,7 @@ reponses_quoi = [
 reponses_ratio = [
     "gros flop rions :joy_cat:",
     "ok flopito :call_me:",
-    "pas nécessaire le ratio enfin bref...",
+    "pas nécessaire le ratio enfin bref..",
 ]
 
 
