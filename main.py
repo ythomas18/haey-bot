@@ -1,7 +1,8 @@
 import aiohttp
 import discord
-from discord.ext import commands
+from discord.ext import tasks, commands
 import random
+import praw
 
 bot = commands.Bot(intents=discord.Intents.all(), command_prefix='/')
 
@@ -16,6 +17,9 @@ reponses_ratio = [
     "ok flopito :call_me:",
     "pas nécessaire le ratio enfin bref..",
 ]
+
+reddit = praw.Reddit(client_id='eqwU7ifSx8ha6vNzmomR5w', client_secret='668cQolPM9cdit6wAzCy1xwAL17uRw',
+                     user_agent='haey/0.1 by trankiste (yanntho97@gmail.com)')
 
 
 @bot.event
@@ -58,6 +62,30 @@ async def meteo(ctx, ville):
 @bot.command()
 async def hello(ctx):
     await ctx.send(ctx.author.mention + " hello!")
+
+def get_subreddit_posts():
+    subreddit = reddit.subreddit('HighschoolDxD')
+    posts = subreddit.hot(limit=5) # Récupère les 5 derniers posts
+    return posts
+
+@tasks.loop(hours=24)
+async def post_subreddit_posts():
+
+    channel = bot.get_channel(1084085506272399370) # ID du canal où vous voulez que les messages soient publiés
+    posts = get_subreddit_posts()
+    for post in posts:
+        await channel.send(post.title + '\n' + post.url)
+
+@bot.command()
+async def start(ctx):
+    post_subreddit_posts.start()
+    await ctx.send('Bot lancé!')
+
+# Commande pour arrêter la tâche planifiée
+@bot.command()
+async def stop(ctx):
+    post_subreddit_posts.stop()
+    await ctx.send('Bot arreté !')
 
 
 bot.run('MTA4MzM3NDExNDEyMDY3MTI3NA.GrRDr3.0kV8TUM3GEYL6PH8lB7vnn5nOLuSoH2hAL6TLw')
