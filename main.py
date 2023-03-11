@@ -1,9 +1,21 @@
-import discord
-import requests
-from discord.ext import commands
 import aiohttp
+import discord
+from discord.ext import commands
+import random
 
 bot = commands.Bot(intents=discord.Intents.all(), command_prefix='/')
+
+reponses_quoi = [
+    "ok QUOICOUBEH",
+    "feur",
+    "QUOICOUBAKA UwU",
+]
+
+reponses_ratio = [
+    "gros flop rions :joy_cat:",
+    "ok flopito :call_me:",
+    "pas nécessaire le ratio enfin bref...",
+]
 
 
 @bot.event
@@ -13,13 +25,15 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if 'quoi' in message.content:
+    if 'quoi' in message.content and bot.user.id != message.author.id:
         print("quoi détecté !")
-        await message.channel.send(f"{message.author.mention} ok QUOICOUBEH")
+        reponse = random.choice(reponses_quoi)
+        await message.channel.send(f"{message.author.mention} {reponse}")
 
-    elif 'ratio' in message.content:
+    elif 'ratio' in message.content and bot.user.id != message.author.id:
         print("ratio détecté !")
-        await message.channel.send(f"{message.author.mention} gros flop rions :joy_cat:")
+        reponse = random.choice(reponses_ratio)
+        await message.channel.send(f"{message.author.mention} {reponse}")
     await bot.process_commands(message)
 
 API_KEY='GAn1Jt3SDDJik1pXpxnfnZ2KvlCRGVVm'
