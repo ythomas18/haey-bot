@@ -1,4 +1,4 @@
-# haey <img src="/obj/lalisa.png" alt="MarineGEO circle logo" style="height: 124px; width:124px;" align="right"/>
+# haey <img src="/obj/lalisa.png" alt="LALISA BLACKPINK" style="height: 124px; width:124px;" align="right"/>
 
 Haey est un bot discord permettant de nombreuses choses.... 
 
