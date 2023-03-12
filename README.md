@@ -16,7 +16,7 @@ Cliquez sur le lien [discord](https://discord.com/api/oauth2/authorize?client_id
 | */haeyhelp*                             |                *Affiche toutes les commandes du bot*                |
 | /cal                                    | Affiche les événements d'aujourd'hui de l'emploi du temps de l'IUT. |
 | /meteo [ville]                          |                Affiche la météo de la ville donnée.                 |
-| /reddit [subreddit]                     |        Met les 5 premiers posts "hot" du subreddit spécifié         |
+| /getReddit [subreddit]                  |        Met les 5 premiers posts "hot" du subreddit spécifié         |
 | /hello                                  |                Le bot répond 'hello' bien poliment.                 |
 | /clear                                  | Supprime tout les messages du channel où la commande à été envoyée. |
 
