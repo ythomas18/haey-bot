@@ -71,10 +71,11 @@ async def meteo(ctx, ville):
 async def hello(ctx):
     await ctx.send(ctx.author.mention + " hello!")
 
-def get_subreddit_posts():
-    subreddit = reddit.subreddit('HighschoolDxD')
-    posts = subreddit.hot(limit=5) # Récupère les 5 derniers posts
-    return posts
+def get_subreddit_posts(subreddit_name):
+    subreddit = reddit.subreddit(subreddit_name)
+    posts = subreddit.hot(limit=6)
+    filtered_posts = [post for post in posts if not post.stickied]
+    return filtered_posts
 
 @tasks.loop(hours=24)
 async def post_subreddit_posts():
@@ -85,17 +86,15 @@ async def post_subreddit_posts():
         await channel.send(post.title + '\n' + post.url)
 
 @bot.command()
-async def start(ctx):
-    post_subreddit_posts.start()
-    await ctx.send('Bot lancé!')
-
-# Commande pour arrêter la tâche planifiée
+async def reddit(ctx, subreddit_name: str):
+    posts = get_subreddit_posts(subreddit_name)
+    for post in posts:
+        await ctx.send(post.title + '\n' + post.url)
+    await ctx.send(f'Bot lancé pour le subreddit {subreddit_name} !')
 @bot.command()
-async def stop(ctx):
-    post_subreddit_posts.stop()
-    channel = bot.get_channel(1084085506272399370)
-    await channel.purge()
-    await ctx.send('Bot arreté !')
+async def clear(ctx):
+    await ctx.channel.purge()
+    await ctx.send('Channel nettoyé !')
 
 @bot.command()
 async def cal(ctx):
@@ -139,8 +138,8 @@ async def haeyhelp(ctx):
     commands_list = [
         ("/cal", "Affiche les événements d'aujourd'hui de l'emploi du temps de l'IUT."),
         ("/meteo [ville]", "Affiche la météo de la ville donnée."),
-        ("/start", "Démarrer la diffusion de messages Reddit."),
-        ("/stop", "Arrêter la diffusion de messages Reddit."),
+        ("/reddit [subreddit]", "Met les 5 premiers posts 'hot' du subreddit spécifié"),
+        ("/clear", "Supprime tout les messages du channel où la commande à été envoyée."),
         ("/hello", "Le bot répond 'hello' bien poliment."),
         # Ajouter d'autres commandes ici
     ]

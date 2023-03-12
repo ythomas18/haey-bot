@@ -1,4 +1,4 @@
-# haey <img src="/obj/lalisa.png" alt="LALISA BLACKPINK" style="height: 124px; width:124px;" align="right"/>
+# haey v0.35 <img src="/obj/lalisa.png" alt="LALISA BLACKPINK" style="height: 124px; width:124px;" align="right"/>
 
 Haey est un bot discord permettant de nombreuses choses.... 
 
@@ -11,13 +11,15 @@ Cliquez sur le lien [discord](https://discord.com/api/oauth2/authorize?client_id
 
 ## Commandes
 
-```
-        /cal,           Affiche les événements d'aujourd'hui de l'emploi du temps de l'IUT.
-        /meteo [ville]  Affiche la météo de la ville donnée.
-        /start,         Démarrer la diffusion de messages Reddit.
-        /stop,          Arrêter la diffusion de messages Reddit.
-        /hello          Le bot répond 'hello' bien poliment.
-```
+| <div style="width:300px">Commande</div> |      <div style="width:300px">         Ce qu'elle fait </div>       | 
+|-----------------------------------------|:-------------------------------------------------------------------:|
+| */haeyhelp*                             |                *Affiche toutes les commandes du bot*                |
+| /cal                                    | Affiche les événements d'aujourd'hui de l'emploi du temps de l'IUT. |
+| /meteo [ville]                          |                Affiche la météo de la ville donnée.                 |
+| /reddit [subreddit]                     |        Met les 5 premiers posts "hot" du subreddit spécifié         |
+| /hello                                  |                Le bot répond 'hello' bien poliment.                 |
+| /clear                                  | Supprime tout les messages du channel où la commande à été envoyée. |
+
 
 ## Autres fonctionnalités
 
