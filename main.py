@@ -1,5 +1,8 @@
+from pathlib import Path
+
 import aiohttp
 import discord
+from coverage import env
 from discord.ext import tasks, commands
 import random
 import praw
@@ -12,9 +15,10 @@ from datetime import datetime, timedelta
 
 bot = commands.Bot(intents=discord.Intents.all(), command_prefix='/')
 
-load_dotenv()
+dotenv_path = Path('env/.env')
+load_dotenv(dotenv_path)
 
-DISCROD_TOKEN =os.getenv('DISCORD_BOT_TOKEN')
+DISCORD_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 API_KEY = os.getenv('WEATHER_API_KEY')
 
 reponses_quoi = [
@@ -155,4 +159,4 @@ async def haeyhelp(ctx):
     await ctx.send(help_message)
 
 
-bot.run(DISCROD_TOKEN)
+bot.run(DISCORD_TOKEN)
