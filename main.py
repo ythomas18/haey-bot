@@ -8,7 +8,7 @@ import os
 from icalendar import Calendar
 from datetime import datetime, timedelta
 
-# haey
+#haey
 
 bot = commands.Bot(intents=discord.Intents.all(), command_prefix='/')
 
