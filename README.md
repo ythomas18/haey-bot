@@ -1,6 +1,9 @@
-# haey 
+# haey <img src="/obj/lalisa.png" alt="MarineGEO circle logo" style="height: 124px; width:124px;" align="right"/>
 
 Haey est un bot discord permettant de nombreuses choses.... 
+
+
+
 
 ## Installation
 
