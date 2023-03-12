@@ -3,8 +3,15 @@ import discord
 from discord.ext import tasks, commands
 import random
 import praw
+from dotenv import load_dotenv
+import os
 
 bot = commands.Bot(intents=discord.Intents.all(), command_prefix='/')
+
+load_dotenv()
+
+DISCROD_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+API_KEY = os.getenv('WEATHER_API_KEY')
 
 reponses_quoi = [
     "ok QUOICOUBEH",
@@ -40,7 +47,6 @@ async def on_message(message):
         await message.channel.send(f"{message.author.mention} {reponse}")
     await bot.process_commands(message)
 
-API_KEY='GAn1Jt3SDDJik1pXpxnfnZ2KvlCRGVVm'
 @bot.command()
 async def meteo(ctx, ville):
     async with aiohttp.ClientSession() as session:
@@ -88,4 +94,4 @@ async def stop(ctx):
     await ctx.send('Bot arreté !')
 
 
-bot.run('MTA4MzM3NDExNDEyMDY3MTI3NA.GrRDr3.0kV8TUM3GEYL6PH8lB7vnn5nOLuSoH2hAL6TLw')
+bot.run(DISCROD_TOKEN)
