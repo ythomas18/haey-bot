@@ -14,7 +14,7 @@ bot = commands.Bot(intents=discord.Intents.all(), command_prefix='/')
 
 load_dotenv()
 
-DISCROD_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+DISCROD_TOKEN =os.getenv('DISCORD_BOT_TOKEN')
 API_KEY = os.getenv('WEATHER_API_KEY')
 
 reponses_quoi = [

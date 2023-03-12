@@ -37,7 +37,7 @@ Cliquez sur le lien [discord](https://discord.com/api/oauth2/authorize?client_id
 
 ## Licence
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](LICENSE)
 
 # English
 
@@ -76,4 +76,4 @@ Click on the [discord](https://discord.com/api/oauth2/authorize?client_id=108337
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](LICENSE)
