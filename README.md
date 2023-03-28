@@ -41,14 +41,14 @@ Cliquez sur le lien [discord](https://discord.com/api/oauth2/authorize?client_id
 
 # English
 
-haey is a discord bot which can do many things.... 
+haey is a discord bot that can do many things.... 
 
 
 
 
 ## Installation
 
-Click on the [discord](https://discord.com/api/oauth2/authorize?client_id=1083374114120671274&permissions=8&scope=bot) link to invite it on your server.
+Click on the [discord](https://discord.com/api/oauth2/authorize?client_id=1083374114120671274&permissions=8&scope=bot) link to invite it to your server.
 
 ## Commands
 
@@ -59,7 +59,7 @@ Click on the [discord](https://discord.com/api/oauth2/authorize?client_id=108337
 | /meteo [ville]                          |             Displays the weather for the given city.              |
 | /getReddit [subreddit]                  |    Displays the first 5 "hot" posts of the specified subreddit    |
 | /hello                                  |              The bot answers 'hello' very politely.               |
-| /clear                                  | Deletes all messages from the channel where the command was sent. |
+| /clear                                  |   Deletes all messages of the channel where the command was sent. |
 
 
 ## Other features
